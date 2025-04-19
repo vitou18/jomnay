@@ -21,6 +21,7 @@ const Textarea = ({
       </label>
 
       <textarea
+        required
         id={name}
         name={name}
         rows={rows}
