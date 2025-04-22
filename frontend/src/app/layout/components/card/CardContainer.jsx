@@ -5,7 +5,7 @@ const CardContainer = ({ data, onDelete, onEdit, type, onView }) => {
   return (
     <>
       {data && data.length > 0 ? (
-        <div className="grid sm:grid-cols-2 md:hidden gap-5">
+        <div className="grid sm:grid-cols-2 md:hidden gap-y-5 gap-x-8">
           {data.map((item) => (
             <CardInfo
               type={type}

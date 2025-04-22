@@ -11,13 +11,15 @@ const Add = ({ onClick }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await onCreateExpense();
-    onClick();
+
+    const res = await onCreateExpense();
+
+    if (res) onClick();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="grid gap-y-2.5 md:gap-y-5 mt-5">
+      <div className="grid gap-y-2.5 md:gap-y-5 mt-3">
         <Input
           label="Category"
           placeholder="Enter your category"

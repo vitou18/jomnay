@@ -1,5 +1,5 @@
 import React from "react";
-import { RiArrowLeftDownLine, RiArrowRightUpLine } from "react-icons/ri";
+import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 const Tooltip = ({ type, amount }) => {
   return (
@@ -12,11 +12,14 @@ const Tooltip = ({ type, amount }) => {
     >
       <span>
         {type === "income" ? "+" : "-"}
-        $
-        {amount}
+        {amount}$
       </span>
-      <span className="text-sm md:text-lg">
-        {type === "income" ? <RiArrowRightUpLine /> : <RiArrowLeftDownLine />}
+      <span
+        className={`${
+          type === "income" ? "-rotate-6" : "rotate-6"
+        } text-sm md:text-lg`}
+      >
+        {type === "income" ? <FaArrowTrendUp /> : <FaArrowTrendDown />}
       </span>
     </div>
   );

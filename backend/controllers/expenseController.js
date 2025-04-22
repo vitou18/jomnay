@@ -4,9 +4,13 @@ exports.addExpense = async (req, res) => {
   const userId = req.user.id;
   const { amount, date, category, note } = req.body;
 
-  if (!amount || !date || !category) {
-    return res.status(400).json({ message: "All fields are required" });
-  }
+  if (!category)
+    return res.status(400).json({ message: "Please fill in category" });
+
+  if (!amount)
+    return res.status(400).json({ message: "Please fill in amount" });
+
+  if (!date) return res.status(400).json({ message: "Please fill in date" });
 
   try {
     const newExpense = new Expense({

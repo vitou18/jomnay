@@ -18,7 +18,7 @@ const Add = ({ onClick }) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="grid gap-y-1.5 mt-5">
+      <div className="grid gap-y-2.5 md:gap-y-5 mt-3">
         <Input
           label="Category"
           placeholder="Enter your category"
