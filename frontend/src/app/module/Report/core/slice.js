@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   report: [],
+  type: "month",
 };
 
 const reportSlice = createSlice({
@@ -11,9 +12,12 @@ const reportSlice = createSlice({
     setReport: (state, action) => {
       state.report = action.payload;
     },
+    setType: (state, action) => {
+      state.type = action.payload;
+    },
   },
 });
 
-export const { setReport } = reportSlice.actions;
+export const { setReport, setType } = reportSlice.actions;
 
 export default reportSlice.reducer;

@@ -1,25 +1,40 @@
 import React from "react";
-import { RiDownloadLine } from "react-icons/ri";
+import { RiArrowUpSLine, RiDownloadLine } from "react-icons/ri";
 import Button from "../../../utils/Button";
 import moment from "moment/moment";
 
-const AllReport = ({ data, onDownloadReport }) => {
+const AllReport = ({ data, type, onChangeType, onDownloadReport }) => {
   //   console.log(data);
+  console.log(type);
 
   return (
     <section className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col gap-y-7">
       <header className="flex items-center justify-between">
-        <h3 className="text-lg md:text-xl font-medium">
-          Recent Report
-        </h3>
+        <h3 className="text-lg md:text-xl font-medium">Report</h3>
 
-        {data && data.length > 0 && (
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="relative group">
+            <select
+              value={type}
+              onChange={onChangeType}
+              className="appearance-none bg-white transition-all duration-300 text-sm text-slate-700 px-4 py-2 pr-10 rounded-md border-2 border-purple-700/5 outline-none focus:border-purple-700"
+            >
+              <option value="week">Weekly</option>
+              <option value="month">Monthly</option>
+              <option value="year">Yearly</option>
+            </select>
+
+            <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+              <RiArrowUpSLine />
+            </div>
+          </div>
+
           <Button
             text="Download"
             onClick={onDownloadReport}
             icon={RiDownloadLine}
           />
-        )}
+        </div>
       </header>
 
       <div className="overflow-x-auto">
