@@ -11,16 +11,17 @@ const Add = ({ onClick }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    await onCreateIncome();
-    onClick();
+    const res = await onCreateIncome();
+
+    if (res) onClick();
   };
 
   return (
     <form onSubmit={onSubmit}>
       <div className="grid gap-y-1.5 mt-5">
         <Input
-          label="Source"
-          placeholder="Enter your source"
+          label="Category"
+          placeholder="Enter your category"
           name="category"
           type="text"
           value={category}
@@ -47,7 +48,7 @@ const Add = ({ onClick }) => {
 
         <Textarea
           label="Note"
-          placeholder="Enter your note"
+          placeholder="Enter your note (optional)"
           name="note"
           value={note}
           onChange={onChangeAdd}

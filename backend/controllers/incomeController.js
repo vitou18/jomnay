@@ -6,9 +6,13 @@ exports.addIncome = async (req, res) => {
   try {
     const { category, amount, date, note } = req.body;
 
-    if (!category || !amount || !date) {
-      return res.status(400).json({ message: "All fields are required" });
-    }
+    if (!category)
+      return res.status(400).json({ message: "Please fill in category" });
+
+    if (!amount)
+      return res.status(400).json({ message: "Please fill in amount" });
+
+    if (!date) return res.status(400).json({ message: "Please fill in date" });
 
     const newIncome = new Income({
       userId,

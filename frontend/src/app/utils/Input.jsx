@@ -39,7 +39,6 @@ const Input = ({
           name={name}
           id={name}
           value={value}
-          required
         />
 
         {Icon &&
