@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const fallbackURL = "http://localhost:8000/api/v1";
+const fallbackURL = "https://jomnay.onrender.com/api/v1";
 
 export const setUpAxios = () => {
   axios.defaults.baseURL = fallbackURL;
