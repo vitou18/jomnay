@@ -5,7 +5,7 @@ import moment from "moment/moment";
 
 const AllReport = ({ data, type, onChangeType, onDownloadReport }) => {
   //   console.log(data);
-  console.log(type);
+  // console.log(type);
 
   return (
     <section className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col gap-y-7">
@@ -17,7 +17,7 @@ const AllReport = ({ data, type, onChangeType, onDownloadReport }) => {
             <select
               value={type}
               onChange={onChangeType}
-              className="appearance-none bg-white transition-all duration-300 text-sm text-slate-700 px-4 py-2 pr-10 rounded-md border-2 border-purple-700/5 outline-none focus:border-purple-700"
+              className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
             >
               <option value="week">Weekly</option>
               <option value="month">Monthly</option>
