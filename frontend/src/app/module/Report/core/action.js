@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reqDownloadReport, reqGetReport } from "./request";
-import { setReport } from "./slice";
+import { setReport, setType } from "./slice";
 import toast from "react-hot-toast";
 
 const useReport = () => {
@@ -9,7 +9,9 @@ const useReport = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const fetchReport = async (type = 'month') => {
+  const { type } = report;
+
+  const fetchReport = async () => {
     return reqGetReport(type)
       .then((res) => {
         // console.log(res.data.report);
@@ -20,7 +22,9 @@ const useReport = () => {
       });
   };
 
-  const onDownloadReport = async (type) => {
+  const onChangeType = (e) => dispatch(setType(e.target.value));
+
+  const onDownloadReport = async () => {
     try {
       const response = await reqDownloadReport(type);
 
@@ -59,6 +63,7 @@ const useReport = () => {
     ...report,
     fetchReport,
     onDownloadReport,
+    onChangeType,
     navigate,
   };
 };
