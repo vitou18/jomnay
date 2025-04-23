@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import useDashboard from "./core/action";
 import Overview from "./components/Overview";

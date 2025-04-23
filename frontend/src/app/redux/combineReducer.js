@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   auth: authSlice,
   dashboard: dashboardSlice,
   income: incomeSlice,
-  income: incomeSlice,
+  // income: incomeSlice,
   expense: expenseSlice,
   report: reportSlice,
 });
