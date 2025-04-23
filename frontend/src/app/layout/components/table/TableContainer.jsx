@@ -62,8 +62,8 @@ const TableContainer = ({ data, onDelete, onEdit }) => {
               <button
                 onClick={handlePrev}
                 disabled={currentPage === 1}
-                className={`px-3 py-1 rounded border ${
-                  currentPage === 1 ? "text-gray-400 border-gray-300" : "text-black border-gray-500"
+                className={`px-3 py-1 rounded border p-2 px-3 md:p-2.5 md:px-3.5 rounded-md${
+                  currentPage === 1 ? "text-gray-400 text-purple-200" : "text-black bg-purple-600/4 text-purple-600 hover:text-white transition-all duration-300 hover:bg-purple-600"
                 }`}
               >
                 Previous
@@ -71,8 +71,9 @@ const TableContainer = ({ data, onDelete, onEdit }) => {
               <button
                 onClick={handleNext}
                 disabled={currentPage === totalPages}
-                className={`px-3 py-1 rounded border ${
-                  currentPage === totalPages ? "text-gray-400 border-gray-300" : "text-black border-gray-500"
+                // p-2 px-3 md:p-2.5 md:px-3.5 cursor-pointer flex items-center gap-x-2 bg-purple-600/4 rounded-md text-purple-600 hover:text-white transition-all duration-300 hover:bg-purple-600
+                className={`px-3 py-1 rounded border cursor-pointer p-2 px-3 md:p-2.5 md:px-3.5 rounded-md ${
+                  currentPage === totalPages ? "text-gray-400 text-purple-200 " : "text-black bg-purple-600/4 text-purple-600 hover:text-white transition-all duration-300 hover:bg-purple-600"
                 }`}
               >
                 Next
