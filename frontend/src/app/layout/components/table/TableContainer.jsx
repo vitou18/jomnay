@@ -66,7 +66,7 @@ const TableContainer = ({ data, onDelete, onEdit, onView }) => {
           </tbody>
         </table>
       ) : (
-        <div className="h-32 text-gray-500 w-full md:hidden flex items-center text-center justify-center">
+        <div className="h-32 text-gray-500 w-full flex items-center text-center justify-center">
           No data available
         </div>
       )}
