@@ -17,7 +17,7 @@ const AllReport = ({
 
   return (
     <section className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col gap-y-7">
-      <header className="flex items-center justify-between">
+      <header className="flex items-center justify-between gap-x-5 gap-y-3 flex-wrap">
         <h3 className="text-lg md:text-xl font-medium">Report</h3>
 
         {data && data.length > 0 && (
@@ -33,6 +33,12 @@ const AllReport = ({
                 <option value="year">Yearly</option>
               </select>
 
+              <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+                <RiArrowUpSLine />
+              </div>
+            </div>
+
+            <div className="relative group">
               <select
                 value={format}
                 onChange={onChangeFormat}
@@ -66,16 +72,16 @@ const AllReport = ({
                   No.
                 </th>
                 <th className="text-left px-7 py-2.5 font-medium text-slate-900">
-                  Type
-                </th>
-                <th className="text-left px-7 py-2.5 font-medium text-slate-900">
                   Category
                 </th>
                 <th className="text-left px-7 py-2.5 font-medium text-slate-900">
                   Date
                 </th>
-                <th className="text-left px-7 py-2.5 font-medium text-slate-900">
+                <th className="text-center px-7 py-2.5 font-medium text-slate-900">
                   Amount
+                </th>
+                <th className="text-left px-7 py-2.5 font-medium text-slate-900">
+                  Type
                 </th>
               </tr>
             </thead>
@@ -85,17 +91,18 @@ const AllReport = ({
                   <td className="pe-7 text-sm py-2.5 text-slate-900/70">
                     {index + 1}
                   </td>
-                  <td className="px-7 capitalize text-sm py-2.5 text-slate-900/70">
-                    {item.type}
-                  </td>
+
                   <td className="px-7 text-sm py-2.5 text-slate-900/70">
                     {item.category}
                   </td>
                   <td className="px-7 text-sm py-2.5 text-slate-900/70">
                     {item.date ? moment(item.date).format("YYYY-MM-DD") : ""}
                   </td>
-                  <td className="px-7 text-sm py-2.5 text-slate-900/70">
-                    ${item.amount.toFixed(2)}
+                  <td className="px-7 text-center text-sm py-2.5 text-slate-900/70">
+                    {item.amount.toFixed(2)}$
+                  </td>
+                  <td className="px-7 capitalize text-sm py-2.5 text-slate-900/70">
+                    {item.type}
                   </td>
                 </tr>
               ))}

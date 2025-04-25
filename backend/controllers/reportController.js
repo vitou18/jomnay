@@ -59,7 +59,11 @@ exports.getAllReport = async (req, res) => {
 
     const report = [
       ...incomeData.map((i) => ({ ...i, type: "income" })),
-      ...expenseData.map((e) => ({ ...e, type: "expense" })),
+      ...expenseData.map((e) => ({
+        ...e,
+        amount: -Math.abs(e.amount),
+        type: "expense",
+      })),
     ];
 
     report.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
@@ -106,7 +110,7 @@ exports.downloadReport = async (req, res) => {
       })),
       ...expenseData.map((e) => ({
         Category: e.category,
-        Amount: e.amount,
+        Amount: -Math.abs(e.amount),
         Date: e.date,
         Type: "Expense",
       })),
