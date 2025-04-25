@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reqDownloadReport, reqGetReport } from "./request";
-import { setReport, setType } from "./slice";
+import { setFormat, setReport, setType } from "./slice";
 import toast from "react-hot-toast";
 
 const useReport = () => {
@@ -23,6 +23,8 @@ const useReport = () => {
   };
 
   const onChangeType = (e) => dispatch(setType(e.target.value));
+  
+  const onChangeFormat = (e) => dispatch(setFormat(e.target.value));
 
   const onDownloadReport = async () => {
     try {
@@ -64,6 +66,7 @@ const useReport = () => {
     fetchReport,
     onDownloadReport,
     onChangeType,
+    onChangeFormat,
     navigate,
   };
 };

@@ -4,8 +4,15 @@ import useReport from "./core/action";
 import AllReport from "./components/AllReport";
 
 const Report = () => {
-  const { report, fetchReport, onDownloadReport, type, onChangeType } =
-    useReport();
+  const {
+    report,
+    fetchReport,
+    format,
+    onChangeFormat,
+    onDownloadReport,
+    type,
+    onChangeType,
+  } = useReport();
 
   useEffect(() => {
     fetchReport();
@@ -18,6 +25,8 @@ const Report = () => {
       <AllReport
         data={report}
         type={type}
+        format={format}
+        onChangeFormat={onChangeFormat}
         onChangeType={onChangeType}
         onDownloadReport={onDownloadReport}
       />

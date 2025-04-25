@@ -3,9 +3,17 @@ import { RiArrowUpSLine, RiDownloadLine } from "react-icons/ri";
 import Button from "../../../utils/Button";
 import moment from "moment/moment";
 
-const AllReport = ({ data, type, onChangeType, onDownloadReport }) => {
+const AllReport = ({
+  data,
+  format,
+  onChangeFormat,
+  type,
+  onChangeType,
+  onDownloadReport,
+}) => {
   //   console.log(data);
   // console.log(type);
+  console.log(format);
 
   return (
     <section className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col gap-y-7">
@@ -23,6 +31,16 @@ const AllReport = ({ data, type, onChangeType, onDownloadReport }) => {
                 <option value="week">Weekly</option>
                 <option value="month">Monthly</option>
                 <option value="year">Yearly</option>
+              </select>
+
+              <select
+                value={format}
+                onChange={onChangeFormat}
+                className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
+              >
+                <option value="excel">Excel</option>
+                <option value="pdf">Pdf</option>
+                <option value="csv">CSV</option>
               </select>
 
               <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
