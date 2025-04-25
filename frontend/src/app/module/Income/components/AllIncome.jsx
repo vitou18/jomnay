@@ -36,34 +36,27 @@ const AllIncome = () => {
         onEdit={onEditIncome}
         onView={onViewIncome}
       />
+      <Modal
+        title="Add Income"
+        desc="Record a new income entry."
+        show={showAdd}
+        setShow={setShowAdd}
+      >
+        <Add onClick={() => setShowAdd((pre) => !pre)} />
+      </Modal>
 
-      {showAdd && (
-        <Modal
-          title="Add Income"
-          desc="Record a new income entry."
-          show={showAdd}
-          setShow={setShowAdd}
-        >
-          <Add onClick={() => setShowAdd((pre) => !pre)} />
-        </Modal>
-      )}
+      <Modal title="View Income" show={showView} setShow={setShowView}>
+        <View />
+      </Modal>
 
-      {showView && (
-        <Modal title="View Income" show={showView} setShow={setShowView}>
-          <View />
-        </Modal>
-      )}
-
-      {showEdit && (
-        <Modal
-          title="Edit Income"
-          desc="Update your income details."
-          show={showEdit}
-          setShow={setShowEdit}
-        >
-          <Edit onClick={() => setShowEdit((pre) => !pre)} />
-        </Modal>
-      )}
+      <Modal
+        title="Edit Income"
+        desc="Update your income details."
+        show={showEdit}
+        setShow={setShowEdit}
+      >
+        <Edit onClick={() => setShowEdit((pre) => !pre)} />
+      </Modal>
     </>
   );
 };

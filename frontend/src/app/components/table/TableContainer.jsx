@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RiDeleteBin7Line, RiEditLine, RiEyeLine } from "react-icons/ri";
 import moment from "moment/moment";
-import Button from "../../../utils/Button";
+import Button from "../../utils/Button";
 
 const TableContainer = ({ data, onDelete, onEdit, onView }) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -44,7 +44,7 @@ const TableContainer = ({ data, onDelete, onEdit, onView }) => {
                   <td className="px-7 text-center text-sm py-2.5 text-slate-900/70">
                     {item.amount.toFixed(2)}$
                   </td>
-                  <td className="px-7 pe-0 py-2.5 flex items-center justify-end gap-x-2.5">
+                  <td className="px-7 pe-0 py-2.5 flex items-center justify-end">
                     <Button icon={RiEyeLine} type="view" onClick={() => onView(item)} />
                     <Button icon={RiEditLine} type="edit" onClick={() => onEdit(item)} />
                     <Button icon={RiDeleteBin7Line} type="delete" onClick={() => onDelete(item?._id)} />

@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../../layout/components/container/Container";
 import AllIncome from "./components/AllIncome";
+import Container from "../../components/layout/Container";
 
 const Income = () => {
   return (

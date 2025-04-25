@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../../utils/Button";
 import { TbLogout2 } from "react-icons/tb";
-import useAuth from "../../../module/Auth/core/action";
-import Modal from "../../../utils/Modal";
-import Action from "../../../utils/Action";
+import Modal from "../../utils/Modal";
+import Action from "../../utils/Action";
+import Button from "../../utils/Button";
+import useAuth from "../../module/Auth/core/action";
 
 const Container = ({ title, children }) => {
   const [scrolled, setScrolled] = useState(false);

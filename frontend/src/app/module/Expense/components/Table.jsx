@@ -1,9 +1,9 @@
 import React, { useState } from "react";
+import HeaderTable from "../../../components/table/HeaderTable";
+import CardContainer from "../../../components/card/CardContainer";
+import TableContainer from "../../../components/table/TableContainer";
 import Modal from "../../../utils/Modal";
 import Action from "../../../utils/Action";
-import CardContainer from "../../../layout/components/card/CardContainer";
-import HeaderTable from "../../../layout/components/table/HeaderTable";
-import TableContainer from "../../../layout/components/table/TableContainer";
 
 const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
   const [selected, setSelected] = useState({ id: null });
@@ -38,19 +38,17 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
         data={data}
       />
 
-      {show && (
-        <Modal
-          title="Delete Expense"
-          desc="Are you sure you want to delete this expense?"
-          show={show}
-          setShow={setShow}
-        >
-          <Action
-            onCancel={() => setShow((pre) => !pre)}
-            onSubmit={onDeleteIncome}
-          />
-        </Modal>
-      )}
+      <Modal
+        title="Delete Expense"
+        desc="Are you sure you want to delete this expense?"
+        show={show}
+        setShow={setShow}
+      >
+        <Action
+          onCancel={() => setShow((pre) => !pre)}
+          onSubmit={onDeleteIncome}
+        />
+      </Modal>
     </section>
   );
 };

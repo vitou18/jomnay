@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useExpense from "../core/action";
 import Table from "./Table";
-import Modal from "../../../utils/Modal";
 import Add from "./Add";
 import Edit from "./Edit";
 import View from "./View";
+import Modal from "../../../utils/Modal";
 
 const AllExpense = () => {
   const { fetchExpense, expense, onDeleteExpense, fetchExpenseById } =
@@ -38,33 +38,27 @@ const AllExpense = () => {
         onView={onViewExpense}
       />
 
-      {showAdd && (
-        <Modal
-          title="Add Expense"
-          desc="Record a new expense entry."
-          show={showAdd}
-          setShow={setShowAdd}
-        >
-          <Add onClick={() => setShowAdd((pre) => !pre)} />
-        </Modal>
-      )}
+      <Modal
+        title="Add Expense"
+        desc="Record a new expense entry."
+        show={showAdd}
+        setShow={setShowAdd}
+      >
+        <Add onClick={() => setShowAdd((pre) => !pre)} />
+      </Modal>
 
-      {showView && (
-        <Modal title="View Expense" show={showView} setShow={setShowView}>
-          <View />
-        </Modal>
-      )}
+      <Modal title="View Expense" show={showView} setShow={setShowView}>
+        <View />
+      </Modal>
 
-      {showEdit && (
-        <Modal
-          title="Edit Expense"
-          desc="Update your expense details."
-          show={showEdit}
-          setShow={setShowEdit}
-        >
-          <Edit onClick={() => setShowEdit((pre) => !pre)} />
-        </Modal>
-      )}
+      <Modal
+        title="Edit Expense"
+        desc="Update your expense details."
+        show={showEdit}
+        setShow={setShowEdit}
+      >
+        <Edit onClick={() => setShowEdit((pre) => !pre)} />
+      </Modal>
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
-import Button from "../../../utils/Button";
 import { RiAddLine } from "react-icons/ri";
+import Button from "../../utils/Button";
 
 const HeaderTable = ({ onClick, title = "Recent List" }) => {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../utils/Button";
-import Input from "../../../utils/Input";
 import useExpense from "../core/action";
+import Input from "../../../utils/Input";
+import Button from "../../../utils/Button";
 import Textarea from "../../../utils/Textarea";
 
 const Add = ({ onClick }) => {
@@ -49,7 +49,7 @@ const Add = ({ onClick }) => {
 
         <Textarea
           label="Note"
-          placeholder="Enter your note"
+          placeholder="Enter your note (optional)"
           name="note"
           value={note}
           onChange={onChangeAdd}

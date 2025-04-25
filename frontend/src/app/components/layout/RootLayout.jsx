@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import logo from "../../_template/assets/img/small_logo.png";
-import useAuth from "../module/Auth/core/action";
-import Modal from "../utils/Modal";
-import Sidebar from "./components/sidebar/Sidebar";
-import Loader from "./components/other/Loader";
-import Action from "../utils/Action";
+import logo from "../../../_template/assets/img/small_logo.png";
+import Modal from "../../utils/Modal";
+import Sidebar from "../sidebar/Sidebar";
+import Loader from "../other/Loader";
+import Action from "../../utils/Action";
 import {
   MdOutlineAttachMoney,
   MdOutlineMoneyOff,
   MdSpaceDashboard,
 } from "react-icons/md";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import useAuth from "../../module/Auth/core/action";
 
 const sidebarItems = [
   { path: "/", name: "Dashboard", icon: <MdSpaceDashboard /> },

@@ -1,8 +1,8 @@
 import { RiDeleteBin7Line, RiEditLine, RiEyeLine } from "react-icons/ri";
 import moment from "moment/moment";
 import Tooltip from "./Tooltip";
-import Button from "../../../utils/Button";
 import { MdOutlineAttachMoney } from "react-icons/md";
+import Button from "../../utils/Button";
 
 const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
   const formattedDate = (date) => moment(date).format("Do MMM YYYY");

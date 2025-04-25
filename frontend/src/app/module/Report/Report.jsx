@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import Container from "../../layout/components/container/Container";
 import useReport from "./core/action";
 import AllReport from "./components/AllReport";
+import Container from "../../components/layout/Container";
 
 const Report = () => {
   const {
