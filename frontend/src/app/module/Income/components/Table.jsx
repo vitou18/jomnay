@@ -31,7 +31,13 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
         type="income"
       />
 
-      <TableContainer onView={onView} onEdit={onEdit} onDelete={onGetIdCard} data={data} />
+      <TableContainer
+        type="income"
+        onView={onView}
+        onEdit={onEdit}
+        onDelete={onGetIdCard}
+        data={data}
+      />
 
       {show && (
         <Modal

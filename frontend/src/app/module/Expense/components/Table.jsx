@@ -36,6 +36,7 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
         onDelete={onGetIdCard}
         onEdit={onEdit}
         data={data}
+        type="expense"
       />
 
       <Modal

@@ -2,6 +2,7 @@ import React from "react";
 import { RiArrowUpSLine, RiDownloadLine } from "react-icons/ri";
 import Button from "../../../utils/Button";
 import moment from "moment/moment";
+import CountUp from "react-countup";
 
 const AllReport = ({
   data,
@@ -98,8 +99,22 @@ const AllReport = ({
                   <td className="px-7 text-sm py-2.5 text-slate-900/70">
                     {item.date ? moment(item.date).format("YYYY-MM-DD") : ""}
                   </td>
-                  <td className="px-7 text-center text-sm py-2.5 text-slate-900/70">
-                    {item.amount.toFixed(2)}$
+                  <td
+                    className={`px-7 text-center text-sm py-2.5 ${
+                      item.type === "income"
+                        ? "text-green-600"
+                        : "text-rose-600"
+                    }`}
+                  >
+                    {item.type === "income" ? "+" : ""}
+                    <CountUp
+                      start={0}
+                      end={parseFloat(item.amount)}
+                      duration={1.5}
+                      decimals={2}
+                      separator=","
+                    />
+                    $
                   </td>
                   <td className="px-7 capitalize text-sm py-2.5 text-slate-900/70">
                     {item.type}
