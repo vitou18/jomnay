@@ -51,10 +51,10 @@ exports.getAllReport = async (req, res) => {
     }
 
     const incomeData = await Income.find({ userId, ...dateFilter })
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .lean();
     const expenseData = await Expense.find({ userId, ...dateFilter })
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .lean();
 
     const report = [
@@ -62,7 +62,7 @@ exports.getAllReport = async (req, res) => {
       ...expenseData.map((e) => ({ ...e, type: "expense" })),
     ];
 
-    report.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+    report.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     res.status(200).json({ report });
   } catch (err) {
