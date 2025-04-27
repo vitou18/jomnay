@@ -7,24 +7,37 @@ exports.getDashboard = async (req, res) => {
     const userId = req.user.id;
     const userObjectId = new Types.ObjectId(String(userId));
 
+    // Total Income
     const totalIncome = await Income.aggregate([
       { $match: { userId: userObjectId } },
       { $group: { _id: null, totalIncome: { $sum: "$amount" } } },
     ]);
 
+    // Total Expense
     const totalExpense = await Expense.aggregate([
       { $match: { userId: userObjectId } },
       { $group: { _id: null, totalExpenses: { $sum: "$amount" } } },
     ]);
 
+    // Fetch all incomes and expenses first (no limit yet)
+    const incomeTransactions = await Income.find({ userId }).sort({ date: -1 });
+    const expenseTransactions = await Expense.find({ userId }).sort({
+      date: -1,
+    });
+
+    // Merge and sort by date, then limit 5
     const lastTransactions = [
-      ...(await Income.find({ userId }).sort({ date: -1 }).limit(5)).map(
-        (txn) => ({ ...txn.toObject(), type: "income" })
-      ),
-      ...(await Expense.find({ userId }).sort({ date: -1 }).limit(5)).map(
-        (txn) => ({ ...txn.toObject(), type: "expense" })
-      ),
-    ].sort((a, b) => b.date - a.date);
+      ...incomeTransactions.map((txn) => ({
+        ...txn.toObject(),
+        type: "income",
+      })),
+      ...expenseTransactions.map((txn) => ({
+        ...txn.toObject(),
+        type: "expense",
+      })),
+    ]
+      .sort((a, b) => b.date - a.date)
+      .slice(0, 5); // Limit after sorting
 
     res.json({
       totalBalance:
