@@ -14,7 +14,7 @@ const AllReport = ({
 }) => {
   //   console.log(data);
   // console.log(type);
-  console.log(format);
+  // console.log(format);
 
   return (
     <section className="bg-white shadow-[0_0_8px_0_rgba(0,0,0,0.05)] rounded-xl p-5 flex flex-col gap-y-7">
