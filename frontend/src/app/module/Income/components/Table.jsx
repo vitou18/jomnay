@@ -47,19 +47,17 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
         </div>
       )}
 
-      {show && (
-        <Modal
-          title="Delete Income"
-          desc="Are you sure you want to delete this income?"
-          show={show}
-          setShow={setShow}
-        >
-          <Action
-            onCancel={() => setShow((pre) => !pre)}
-            onSubmit={onDeleteIncome}
-          />
-        </Modal>
-      )}
+      <Modal
+        title="Delete Income"
+        desc="Are you sure you want to delete this income?"
+        show={show}
+        setShow={setShow}
+      >
+        <Action
+          onCancel={() => setShow((pre) => !pre)}
+          onSubmit={onDeleteIncome}
+        />
+      </Modal>
     </section>
   );
 };
