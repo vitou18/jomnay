@@ -21,47 +21,45 @@ const AllReport = ({
       <header className="flex items-center justify-between gap-x-5 gap-y-3 flex-wrap">
         <h3 className="text-lg md:text-xl font-medium">Report</h3>
 
-        {data && data.length > 0 && (
-          <div className="flex items-center gap-3 flex-wrap">
-            <div className="relative group">
-              <select
-                value={type}
-                onChange={onChangeType}
-                className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
-              >
-                <option value="week">Weekly</option>
-                <option value="month">Monthly</option>
-                <option value="year">Yearly</option>
-              </select>
+        <div className="flex items-center gap-3 flex-wrap">
+          <div className="relative group">
+            <select
+              value={type}
+              onChange={onChangeType}
+              className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
+            >
+              <option value="week">Weekly</option>
+              <option value="month">Monthly</option>
+              <option value="year">Yearly</option>
+            </select>
 
-              <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-                <RiArrowUpSLine />
-              </div>
+            <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+              <RiArrowUpSLine />
             </div>
-
-            <div className="relative group">
-              <select
-                value={format}
-                onChange={onChangeFormat}
-                className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
-              >
-                <option value="excel">Excel</option>
-                <option value="pdf">Pdf</option>
-                <option value="csv">CSV</option>
-              </select>
-
-              <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
-                <RiArrowUpSLine />
-              </div>
-            </div>
-
-            <Button
-              text="Download"
-              onClick={onDownloadReport}
-              icon={RiDownloadLine}
-            />
           </div>
-        )}
+
+          <div className="relative group">
+            <select
+              value={format}
+              onChange={onChangeFormat}
+              className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
+            >
+              <option value="csv">CSV</option>
+              <option value="xlsx">Excel</option>
+              <option value="pdf">Pdf</option>
+            </select>
+
+            <div className="pointer-events-none transition-all duration-300 rotate-180 group-focus-within:rotate-0 group-focus-within:text-black absolute inset-y-0 right-0 flex items-center px-3 text-slate-500">
+              <RiArrowUpSLine />
+            </div>
+          </div>
+
+          <Button
+            text="Download"
+            onClick={onDownloadReport}
+            icon={RiDownloadLine}
+          />
+        </div>
       </header>
 
       <div className="overflow-x-auto">
@@ -106,7 +104,7 @@ const AllReport = ({
                         : "text-rose-600"
                     }`}
                   >
-                    {item.type === "income" ? "+" : ""}
+                    {item.type === "income" ? "+" : "-"}
                     <CountUp
                       start={0}
                       end={parseFloat(item.amount)}

@@ -77,8 +77,18 @@ exports.downloadReport = async (req, res) => {
     const userId = req.user.id;
     const { type, format } = req.query;
 
-    let dateFilter = {};
+    // Validate format
+    const supportedFormats = ["csv", "pdf", "xlsx"];
+    if (!supportedFormats.includes(format)) {
+      return res.status(400).json({ message: "Invalid format requested" });
+    }
 
+    // Setup dynamic filename
+    const todayStr = new Date().toISOString().split("T")[0];
+    const fileName = `report_${type || "all"}_${todayStr}`;
+
+    // Prepare date filter
+    let dateFilter = {};
     if (type) {
       const range = getDateRange(type);
       if (range) {
@@ -86,7 +96,7 @@ exports.downloadReport = async (req, res) => {
       }
     }
 
-    // get income and expense by dateFilter
+    // Fetch data
     const incomeData = await Income.find({ userId, ...dateFilter })
       .sort({ date: -1 })
       .lean();
@@ -94,6 +104,7 @@ exports.downloadReport = async (req, res) => {
       .sort({ date: -1 })
       .lean();
 
+    // Combine all data
     const allData = [
       ...incomeData.map((i) => ({
         Category: i.category,
@@ -109,16 +120,38 @@ exports.downloadReport = async (req, res) => {
       })),
     ];
 
+    // No data case
+    if (allData.length === 0) {
+      return res
+        .status(404)
+        .json({ message: "No data found for the selected range." });
+    }
+
     allData.sort((a, b) => new Date(b.Date) - new Date(a.Date));
+
+    // Calculate totals
+    const totalIncome = incomeData.reduce((sum, item) => sum + item.amount, 0);
+    const totalExpense = expenseData.reduce(
+      (sum, item) => sum + item.amount,
+      0
+    );
+    const balance = totalIncome - totalExpense;
+
+    // Add totals for CSV/XLSX
+    const totalsRow = [
+      { Category: "Total Income", Amount: totalIncome, Date: "", Type: "" },
+      { Category: "Total Expense", Amount: totalExpense, Date: "", Type: "" },
+      { Category: "Final Balance", Amount: balance, Date: "", Type: "" },
+    ];
 
     // Handle different formats
     if (format === "csv") {
-      const ws = xlsx.utils.json_to_sheet(allData);
+      const ws = xlsx.utils.json_to_sheet([...allData, ...totalsRow]);
       const csvData = xlsx.utils.sheet_to_csv(ws);
 
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=report_details.csv"
+        `attachment; filename=${fileName}.csv`
       );
       res.setHeader("Content-Type", "text/csv");
 
@@ -128,24 +161,22 @@ exports.downloadReport = async (req, res) => {
 
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=transaction_report.pdf"
+        `attachment; filename=${fileName}.pdf`
       );
       res.setHeader("Content-Type", "application/pdf");
 
       doc.pipe(res);
 
-      // --- Top Logo ---
+      // Logo
       const logoPath = path.join(__dirname, "../assets/img/big_logo.png");
       if (fs.existsSync(logoPath)) {
         doc.image(logoPath, 50, 20, { width: 50 });
       }
 
-      // Title with Rubik font
-      doc
-        .fontSize(24)
-        .text("Transaction Report", 110, 30, { align: "left" });
+      // Title
+      doc.fontSize(24).text("Transaction Report", 110, 30, { align: "left" });
 
-      // --- Sub Title (Download Date) ---
+      // Downloaded Date
       doc
         .moveDown(0.5)
         .fontSize(10)
@@ -155,7 +186,7 @@ exports.downloadReport = async (req, res) => {
 
       doc.moveDown(1);
 
-      // --- Draw line ---
+      // Draw a line
       doc
         .moveTo(50, doc.y)
         .lineTo(doc.page.width - 50, doc.y)
@@ -163,36 +194,27 @@ exports.downloadReport = async (req, res) => {
 
       doc.moveDown(1);
 
-      // --- Table Config ---
-      const tableTop = doc.y;
+      // Table Config
       const itemMargin = 20;
-
       const columnWidths = {
         date: 120,
         category: 200,
         amount: 100,
       };
 
-      // --- Group Data ---
-      const incomeEntries = allData.filter((item) => item.Type === "Income");
-      const expenseEntries = allData.filter((item) => item.Type === "Expense");
-
       const drawSection = (title, entries) => {
         if (entries.length === 0) return;
 
-        // Header background
+        // Section Title
         doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#f8b195");
-
         doc
           .fillColor("black")
           .fontSize(12)
           .text(title, 55, doc.y + 5);
-
         doc.moveDown(1.2);
 
         // Table Headers
         const tableYStart = doc.y;
-
         doc
           .fillColor("black")
           .fontSize(10)
@@ -205,11 +227,10 @@ exports.downloadReport = async (req, res) => {
             { align: "right" }
           );
 
-        const rowHeight = 15;
         doc.moveDown(0.7);
 
-        // Table rows
-        entries.forEach((item, index) => {
+        // Table Rows
+        entries.forEach((item) => {
           let y = doc.y;
           if (y > doc.page.height - 50) {
             doc.addPage();
@@ -225,7 +246,9 @@ exports.downloadReport = async (req, res) => {
               item.Amount.toFixed(2),
               55 + columnWidths.date + columnWidths.category + itemMargin * 2,
               y,
-              { align: "right" }
+              {
+                align: "right",
+              }
             );
 
           doc
@@ -240,23 +263,14 @@ exports.downloadReport = async (req, res) => {
         doc.moveDown(1.5);
       };
 
-      // --- Draw Incomes ---
-      drawSection("Income", incomeEntries);
+      // Draw Sections
+      const incomeEntries = allData.filter((item) => item.Type === "Income");
+      const expenseEntries = allData.filter((item) => item.Type === "Expense");
 
-      // --- Draw Expenses ---
+      drawSection("Income", incomeEntries);
       drawSection("Expense", expenseEntries);
 
-      // --- Summary Total ---
-      const totalIncome = incomeEntries.reduce(
-        (sum, item) => sum + item.Amount,
-        0
-      );
-      const totalExpense = expenseEntries.reduce(
-        (sum, item) => sum + item.Amount,
-        0
-      );
-      const balance = totalIncome + totalExpense;
-
+      // Final Balance Section
       doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#f8b195");
 
       doc
@@ -267,20 +281,23 @@ exports.downloadReport = async (req, res) => {
           balance.toFixed(2),
           60 + columnWidths.date + columnWidths.category + itemMargin * 2,
           doc.y + 5,
-          { align: "right" }
+          {
+            align: "right",
+          }
         );
 
       doc.end();
     } else {
+      // XLSX
       const wb = xlsx.utils.book_new();
-      const ws = xlsx.utils.json_to_sheet(allData);
+      const ws = xlsx.utils.json_to_sheet([...allData, ...totalsRow]);
       xlsx.utils.book_append_sheet(wb, ws, "Transactions");
 
       const buffer = xlsx.write(wb, { type: "buffer", bookType: "xlsx" });
 
       res.setHeader(
         "Content-Disposition",
-        "attachment; filename=report_details.xlsx"
+        `attachment; filename=${fileName}.xlsx`
       );
       res.setHeader(
         "Content-Type",

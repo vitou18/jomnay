@@ -9,7 +9,7 @@ const useReport = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { type } = report;
+  const { type, format } = report;
 
   const fetchReport = async () => {
     return reqGetReport(type)
@@ -23,18 +23,16 @@ const useReport = () => {
   };
 
   const onChangeType = (e) => dispatch(setType(e.target.value));
-  
+
   const onChangeFormat = (e) => dispatch(setFormat(e.target.value));
 
   const onDownloadReport = async () => {
     try {
-      // Make the API call to download the report
-      const response = await reqDownloadReport({ type, format, from, to });
+      const response = await reqDownloadReport(type, format);
 
       let mimeType = "application/octet-stream";
       let defaultFileName = "report";
 
-      // Handle different file formats
       switch (format) {
         case "excel":
           mimeType =
@@ -54,15 +52,12 @@ const useReport = () => {
           return;
       }
 
-      // Create the Blob from the response data
       const blob = new Blob([response.data], { type: mimeType });
       const url = window.URL.createObjectURL(blob);
 
-      // Create an anchor element to trigger the download
       const link = document.createElement("a");
       link.href = url;
 
-      // Extract filename from content-disposition header if present
       const contentDisposition = response.headers["content-disposition"];
       if (contentDisposition) {
         const match = contentDisposition.match(/filename="?(.+?)"?$/);
@@ -71,16 +66,13 @@ const useReport = () => {
         link.download = defaultFileName;
       }
 
-      // Trigger the download and clean up
       document.body.appendChild(link);
       link.click();
       link.remove();
-      window.URL.revokeObjectURL(url); // Free up memory
+      window.URL.revokeObjectURL(url);
 
-      // Show success toast
       toast.success("Report downloaded successfully!");
     } catch (error) {
-      // Handle error case
       toast.error("Report download failed!");
       console.error("Download error:", error);
     }
