@@ -288,7 +288,7 @@ exports.downloadReport = async (req, res) => {
 
       doc.end();
     } else {
-      // XLSX
+      // xlsx
       const wb = xlsx.utils.book_new();
       const ws = xlsx.utils.json_to_sheet([...allData, ...totalsRow]);
       xlsx.utils.book_append_sheet(wb, ws, "Transactions");

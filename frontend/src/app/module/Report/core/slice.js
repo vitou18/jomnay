@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   report: [],
   type: "month",
-  format: "excel",
+  format: "csv",
 };
 
 const reportSlice = createSlice({

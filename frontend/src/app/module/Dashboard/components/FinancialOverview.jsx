@@ -1,5 +1,6 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import CountUp from "react-countup";
 
 const FinancialOverview = ({ data }) => {
   // console.log(data);
@@ -48,7 +49,6 @@ const FinancialOverview = ({ data }) => {
       <h2 className="text-lg md:text-xl font-medium text-slate-900 mb-7">
         Financial Overview
       </h2>
-
       <div className="donut-chart flex flex-col items-center justify-center space-y-4 relative">
         <Chart options={options} series={series} type="donut" width="400" />
 
@@ -56,7 +56,14 @@ const FinancialOverview = ({ data }) => {
           Total Balance:
         </div>
         <div className="absolute top-[38%] sm:top-[43%] left-1/2 transform -translate-x-1/2 text-[18px] sm:text-[26px] font-medium">
-          ${balance}
+          <CountUp
+            start={0}
+            end={parseFloat(balance)}
+            duration={1.5}
+            decimals={2}
+            separator=","
+          />
+          $
         </div>
       </div>
     </div>

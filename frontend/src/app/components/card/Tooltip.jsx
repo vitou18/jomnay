@@ -1,4 +1,5 @@
 import React from "react";
+import CountUp from "react-countup";
 import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
 
 const Tooltip = ({ type, amount }) => {
@@ -12,8 +13,16 @@ const Tooltip = ({ type, amount }) => {
     >
       <span>
         {type === "income" ? "+" : "-"}
-        {amount}$
+        <CountUp
+          start={0}
+          end={parseFloat(amount)}
+          duration={1.5}
+          decimals={2}
+          separator=","
+        />
+        $
       </span>
+
       <span
         className={`${
           type === "income" ? "-rotate-6" : "rotate-6"

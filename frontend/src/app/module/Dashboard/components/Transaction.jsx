@@ -1,8 +1,7 @@
 import React from "react";
-import { MdOutlineAttachMoney, MdOutlineMoneyOff } from "react-icons/md";
 import moment from "moment/moment";
 import Tooltip from "../../../components/card/Tooltip";
-
+import { TbReceiptDollar, TbLocationDollar  } from "react-icons/tb";
 const Transaction = ({ category, amount, date, type }) => {
   const formattedDate = (date) => moment(date).format("Do MMM YYYY");
 
@@ -18,7 +17,7 @@ const Transaction = ({ category, amount, date, type }) => {
             }
             `}
         >
-          {type === "income" ? <MdOutlineAttachMoney /> : <MdOutlineMoneyOff />}
+          {type === "income" ? <TbReceiptDollar /> : <TbLocationDollar  />}
         </div>
 
         <div>

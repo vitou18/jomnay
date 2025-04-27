@@ -35,7 +35,7 @@ exports.getAllIncome = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    const income = await Income.find({ userId }).sort({ createdAt: -1 });
+    const income = await Income.find({ userId }).sort({ date: -1 });
 
     res.status(200).json(income);
   } catch (e) {

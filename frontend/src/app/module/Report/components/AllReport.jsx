@@ -21,7 +21,7 @@ const AllReport = ({
       <header className="flex items-center justify-between gap-x-5 gap-y-3 flex-wrap">
         <h3 className="text-lg md:text-xl font-medium">Report</h3>
 
-        <div className="flex items-center gap-3 flex-wrap">
+        <div className="flex items-center gap-2 flex-wrap">
           <div className="relative group">
             <select
               value={type}
