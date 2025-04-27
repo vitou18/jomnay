@@ -23,21 +23,29 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
     <section className="bg-white rounded-xl p-5 flex flex-col gap-y-7">
       <HeaderTable onClick={onAdd} />
 
-      <CardContainer
-        data={data}
-        onEdit={onEdit}
-        onDelete={onGetIdCard}
-        onView={onView}
-        type="income"
-      />
+      {data && data.length > 0 ? (
+        <>
+          <CardContainer
+            data={data}
+            onEdit={onEdit}
+            onDelete={onGetIdCard}
+            onView={onView}
+            type="income"
+          />
 
-      <TableContainer
-        type="income"
-        onView={onView}
-        onEdit={onEdit}
-        onDelete={onGetIdCard}
-        data={data}
-      />
+          <TableContainer
+            type="income"
+            onView={onView}
+            onEdit={onEdit}
+            onDelete={onGetIdCard}
+            data={data}
+          />
+        </>
+      ) : (
+        <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
+          No data available
+        </div>
+      )}
 
       {show && (
         <Modal

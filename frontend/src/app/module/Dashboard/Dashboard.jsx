@@ -17,15 +17,16 @@ const Dashboard = () => {
 
   return (
     <Container title="Dashboard">
-      <Overview data={dashboard} />
-
       {dashboard.recentTransactions?.length > 0 ? (
-        <div className="flex flex-col gap-5 lg:flex-row">
-          <RecentTransaction data={dashboard.recentTransactions} />
-          <FinancialOverview data={dashboard} />
-        </div>
+        <>
+          <Overview data={dashboard} />
+          <div className="flex flex-col gap-5 lg:flex-row">
+            <RecentTransaction data={dashboard.recentTransactions} />
+            <FinancialOverview data={dashboard} />
+          </div>
+        </>
       ) : (
-        <div className="h-32 text-gray-500 w-full flex items-center text-center justify-center">
+        <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
           No data available
         </div>
       )}
