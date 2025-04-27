@@ -2,7 +2,7 @@ import { RiDeleteBin7Line, RiEditLine, RiEyeLine } from "react-icons/ri";
 import moment from "moment/moment";
 import Tooltip from "./Tooltip";
 import Button from "../../utils/Button";
-import { TbReceiptDollar, TbShoppingCartDollar } from "react-icons/tb";
+import { TbReceiptDollar, TbLocationDollar } from "react-icons/tb";
 const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
   const formattedDate = (date) => moment(date).format("Do MMM YYYY");
 
@@ -24,7 +24,7 @@ const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
             }
             `}
         >
-          {type === "income" ? <TbReceiptDollar /> : <TbShoppingCartDollar />}
+          {type === "income" ? <TbReceiptDollar /> : <TbLocationDollar />}
         </div>
 
         <div className="flex flex-col">
