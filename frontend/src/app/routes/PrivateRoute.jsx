@@ -3,9 +3,9 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Dashboard from "../module/Dashboard/Dashboard";
 import Income from "../module/Income/Income";
 import Expense from "../module/Expense/Expense";
-import RootLayout from "../layout/RootLayout";
 import useAuth from "../module/Auth/core/action";
 import Report from "../module/Report/Report";
+import RootLayout from "../components/layout/RootLayout";
 
 const PrivateRoute = () => {
   const { accessToken } = useAuth();

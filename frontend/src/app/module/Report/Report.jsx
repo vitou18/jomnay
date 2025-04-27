@@ -1,11 +1,18 @@
 import React, { useEffect } from "react";
-import Container from "../../layout/components/container/Container";
 import useReport from "./core/action";
 import AllReport from "./components/AllReport";
+import Container from "../../components/layout/Container";
 
 const Report = () => {
-  const { report, fetchReport, onDownloadReport, type, onChangeType } =
-    useReport();
+  const {
+    report,
+    fetchReport,
+    format,
+    onChangeFormat,
+    onDownloadReport,
+    type,
+    onChangeType,
+  } = useReport();
 
   useEffect(() => {
     fetchReport();
@@ -18,6 +25,8 @@ const Report = () => {
       <AllReport
         data={report}
         type={type}
+        format={format}
+        onChangeFormat={onChangeFormat}
         onChangeType={onChangeType}
         onDownloadReport={onDownloadReport}
       />

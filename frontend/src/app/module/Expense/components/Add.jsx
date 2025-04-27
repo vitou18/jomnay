@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../../../utils/Button";
-import Input from "../../../utils/Input";
 import useExpense from "../core/action";
+import Input from "../../../utils/Input";
+import Button from "../../../utils/Button";
 import Textarea from "../../../utils/Textarea";
 
 const Add = ({ onClick }) => {
@@ -11,13 +11,15 @@ const Add = ({ onClick }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await onCreateExpense();
-    onClick();
+
+    const res = await onCreateExpense();
+
+    if (res) onClick();
   };
 
   return (
     <form onSubmit={onSubmit}>
-      <div className="grid gap-y-2.5 md:gap-y-5 mt-5">
+      <div className="grid gap-y-2.5 md:gap-y-5 mt-3">
         <Input
           label="Category"
           placeholder="Enter your category"
@@ -47,7 +49,7 @@ const Add = ({ onClick }) => {
 
         <Textarea
           label="Note"
-          placeholder="Enter your note"
+          placeholder="Enter your note (optional)"
           name="note"
           value={note}
           onChange={onChangeAdd}

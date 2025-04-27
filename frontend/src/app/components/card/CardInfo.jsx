@@ -1,9 +1,8 @@
 import { RiDeleteBin7Line, RiEditLine, RiEyeLine } from "react-icons/ri";
 import moment from "moment/moment";
 import Tooltip from "./Tooltip";
-import Button from "../../../utils/Button";
-import { MdOutlineAttachMoney, MdOutlineMoneyOff } from "react-icons/md";
-
+import Button from "../../utils/Button";
+import { TbReceiptDollar, TbShoppingCartDollar } from "react-icons/tb";
 const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
   const formattedDate = (date) => moment(date).format("Do MMM YYYY");
 
@@ -14,7 +13,7 @@ const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
   };
 
   return (
-    <article className="flex items-start py-3.5 justify-between rounded-md">
+    <article className="flex items-start py-1 justify-between rounded-md">
       <div className="flex flex-col gap-2.5">
         <div
           className={`w-[40px] h-[40px] text-lg rounded-md grid place-items-center
@@ -25,7 +24,7 @@ const CardInfo = ({ data, onDelete, onEdit, type, onView }) => {
             }
             `}
         >
-          {type === "income" ? <MdOutlineAttachMoney /> : <MdOutlineMoneyOff />}
+          {type === "income" ? <TbReceiptDollar /> : <TbShoppingCartDollar />}
         </div>
 
         <div className="flex flex-col">

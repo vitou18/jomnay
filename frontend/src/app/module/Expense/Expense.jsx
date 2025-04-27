@@ -1,6 +1,6 @@
 import React from "react";
-import Container from "../../layout/components/container/Container";
 import AllExpense from "./components/AllExpense";
+import Container from "../../components/layout/Container";
 
 const Expense = () => {
   return (

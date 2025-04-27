@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   report: [],
   type: "month",
+  format: "csv",
 };
 
 const reportSlice = createSlice({
@@ -15,9 +16,12 @@ const reportSlice = createSlice({
     setType: (state, action) => {
       state.type = action.payload;
     },
+    setFormat: (state, action) => {
+      state.format = action.payload;
+    },
   },
 });
 
-export const { setReport, setType } = reportSlice.actions;
+export const { setReport, setType, setFormat } = reportSlice.actions;
 
 export default reportSlice.reducer;

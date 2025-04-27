@@ -40,12 +40,7 @@ const useExpense = () => {
   const onResetAdd = () => dispatch(resetExpenseInfo());
 
   const onCreateExpense = async () => {
-    const { category, amount, date } = expense.expenseInfo;
-
-    if (!category || !amount || !date) {
-      toast.error("Please fill in all fields.");
-      return;
-    }
+    const { date } = expense.expenseInfo;
 
     const formattedDate = moment(date).toISOString();
 
@@ -60,10 +55,20 @@ const useExpense = () => {
       await reqCreateExpense(data);
 
       toast.success("Expense added...");
+
       onResetAdd();
       fetchExpense();
-    } catch {
-      toast.error("Error adding expense");
+
+      return true;
+    } catch (e) {
+      console.log(e);
+
+      const message =
+        e?.response?.data?.message || e.message || "Error adding income";
+
+      toast.error(message);
+
+      return false;
     } finally {
       setLoading(false);
     }

@@ -46,7 +46,7 @@ const Button = ({ text, type, style, icon: Icon, onClick }) => {
     return (
       <button
         onClick={onClick}
-        className="p-2.5 cursor-pointer flex items-center justify-center text-slate-900 transition-all duration-300 hover:text-rose-600"
+        className="p-2 cursor-pointer flex items-center justify-center text-slate-900 transition-all duration-300 hover:text-rose-600"
       >
         <span className="text-lg">
           <Icon />
@@ -59,7 +59,20 @@ const Button = ({ text, type, style, icon: Icon, onClick }) => {
     return (
       <button
         onClick={onClick}
-        className="p-2.5 cursor-pointer flex items-center justify-center text-slate-900 transition-all duration-300 hover:text-purple-600"
+        className="p-2 cursor-pointer flex items-center justify-center text-slate-900 transition-all duration-300 hover:text-green-600"
+      >
+        <span className="text-lg">
+          <Icon />
+        </span>
+      </button>
+    );
+  }
+  
+  if (Icon && type === "view") {
+    return (
+      <button
+        onClick={onClick}
+        className="p-2 cursor-pointer flex items-center justify-center text-slate-900 transition-all duration-300 hover:text-purple-600"
       >
         <span className="text-lg">
           <Icon />

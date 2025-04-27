@@ -2,9 +2,9 @@
 import React, { useEffect } from "react";
 import useDashboard from "./core/action";
 import Overview from "./components/Overview";
-import Container from "../../layout/components/container/Container";
 import RecentTransaction from "./components/RecentTransaction";
 import FinancialOverview from "./components/FinancialOverview";
+import Container from "../../components/layout/Container";
 
 const Dashboard = () => {
   const { dashboard, fetchDashboard } = useDashboard();
@@ -25,7 +25,7 @@ const Dashboard = () => {
           <FinancialOverview data={dashboard} />
         </div>
       ) : (
-        <div className="h-32 text-gray-500 w-full md:hidden flex items-center text-center justify-center">
+        <div className="h-32 text-gray-500 w-full flex items-center text-center justify-center">
           No data available
         </div>
       )}

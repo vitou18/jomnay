@@ -38,12 +38,7 @@ const useIncome = () => {
   const onResetAdd = () => dispatch(resetIncomeInfo());
 
   const onCreateIncome = async () => {
-    const { category, amount, date } = income.incomeInfo;
-
-    if (!category || !amount || !date) {
-      toast.error("Please fill in all fields.");
-      return;
-    }
+    const { date } = income.incomeInfo;
 
     const formattedDate = moment(date).toISOString();
 
@@ -55,11 +50,22 @@ const useIncome = () => {
     setLoading(true);
     try {
       await reqCreateIncome(data);
+
       toast.success("Income added...");
+
       onResetAdd();
       fetchIncome();
-    } catch {
-      toast.error("Error adding income");
+
+      return true;
+    } catch (e) {
+      // console.log(e);
+
+      const message =
+        e?.response?.data?.message || e.message || "Error adding income";
+
+      toast.error(message);
+
+      return false;
     } finally {
       setLoading(false);
     }

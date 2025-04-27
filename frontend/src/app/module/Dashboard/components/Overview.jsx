@@ -1,32 +1,32 @@
 import Card from "./Card";
-import { FaBalanceScale, FaHandHoldingUsd, FaMoneyBillWave } from "react-icons/fa";
-import { IoWalletOutline } from "react-icons/io5";
-import { MdOutlineAttachMoney, MdOutlineMoneyOff } from "react-icons/md";
-
+import { BiSolidWallet } from "react-icons/bi";
+import { GiPayMoney, GiReceiveMoney } from "react-icons/gi";
+import { FaSackDollar } from "react-icons/fa6";
+import { TbReceiptDollar, TbLocationDollar } from "react-icons/tb";
 const Overview = ({ data }) => {
   const formatNumber = (num) =>
     typeof num === "number" ? num.toFixed(2) : "0.00";
 
   const cardData = [
     {
-      icon: MdOutlineAttachMoney,
-      blur: FaHandHoldingUsd,
+      icon: TbReceiptDollar,
+      blur: GiReceiveMoney,
       title: "Total Income",
       style: "green",
       balance: formatNumber(data?.totalIncome),
       desc: "All Time Earning",
     },
     {
-      icon: MdOutlineMoneyOff,
-      blur: FaMoneyBillWave,
+      icon: TbLocationDollar,
+      blur: GiPayMoney,
       title: "Total Expense",
       style: "red",
       balance: formatNumber(data?.totalExpense),
       desc: "All-time spending",
     },
     {
-      icon: IoWalletOutline,
-      blur: FaBalanceScale,
+      icon: BiSolidWallet,
+      blur: FaSackDollar,
       title: "Total Balance",
       style: "blue",
       balance: formatNumber(data?.totalBalance),

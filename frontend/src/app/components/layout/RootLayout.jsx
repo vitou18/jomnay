@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
-import logo from "../../_template/assets/img/small_logo.png";
-import useAuth from "../module/Auth/core/action";
-import Modal from "../utils/Modal";
-import Sidebar from "./components/sidebar/Sidebar";
-import Loader from "./components/other/Loader";
-import Action from "../utils/Action";
-import {
-  MdOutlineAttachMoney,
-  MdOutlineMoneyOff,
-  MdSpaceDashboard,
-} from "react-icons/md";
+import logo from "../../../_template/assets/img/small_logo.png";
+import Modal from "../../utils/Modal";
+import Sidebar from "../sidebar/Sidebar";
+import Loader from "../other/Loader";
+import Action from "../../utils/Action";
+import { MdSpaceDashboard } from "react-icons/md";
 import { HiOutlineDocumentReport } from "react-icons/hi";
+import useAuth from "../../module/Auth/core/action";
+import { TbReceiptDollar, TbLocationDollar } from "react-icons/tb";
 
 const sidebarItems = [
   { path: "/", name: "Dashboard", icon: <MdSpaceDashboard /> },
-  { path: "/income", name: "Income", icon: <MdOutlineAttachMoney /> },
-  { path: "/expense", name: "Expense", icon: <MdOutlineMoneyOff /> },
+  { path: "/income", name: "Income", icon: <TbReceiptDollar /> },
+  { path: "/expense", name: "Expense", icon: <TbLocationDollar /> },
   { path: "/report", name: "Report", icon: <HiOutlineDocumentReport /> },
 ];
 
@@ -54,21 +51,19 @@ const RootLayout = () => {
         <Outlet />
       </div>
 
-      {show && (
-        <Modal
-          show={show}
-          setShow={setShow}
-          title="Logout"
-          desc="Are you sure you want to logout?"
-        >
-          <Action
-            cancelText="Cancel"
-            submitText="Yes"
-            onCancel={() => setShow((pre) => !pre)}
-            onSubmit={onClickLogout}
-          />
-        </Modal>
-      )}
+      <Modal
+        show={show}
+        setShow={setShow}
+        title="Logout"
+        desc="Are you sure you want to logout?"
+      >
+        <Action
+          cancelText="Cancel"
+          submitText="Yes"
+          onCancel={() => setShow((pre) => !pre)}
+          onSubmit={onClickLogout}
+        />
+      </Modal>
     </div>
   );
 };

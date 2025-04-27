@@ -42,7 +42,7 @@ const Card = ({ icon: Icon, blur: Blur, title, balance, style, desc }) => {
         </h3>
         <span className="text-gray-500 text-sm">{desc}</span>
 
-        <div className="opacity-[3%] group-hover:opacity-[5%] transition-all duration-300 text-[120px] absolute -rotate-45 -bottom-2 -right-2">
+        <div className="opacity-[3%] group-hover:opacity-[5%] transition-all duration-300 text-[120px] absolute -rotate-6 bottom-2 right-2">
           <Blur />
         </div>
       </main>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import CardContainer from "../../../layout/components/card/CardContainer";
-import HeaderTable from "../../../layout/components/table/HeaderTable";
-import TableContainer from "../../../layout/components/table/TableContainer";
+import HeaderTable from "../../../components/table/HeaderTable";
+import CardContainer from "../../../components/card/CardContainer";
+import TableContainer from "../../../components/table/TableContainer";
 import Modal from "../../../utils/Modal";
 import Action from "../../../utils/Action";
 
@@ -31,7 +31,13 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
         type="income"
       />
 
-      <TableContainer onView={onView} onEdit={onEdit} onDelete={onGetIdCard} data={data} />
+      <TableContainer
+        type="income"
+        onView={onView}
+        onEdit={onEdit}
+        onDelete={onGetIdCard}
+        data={data}
+      />
 
       {show && (
         <Modal

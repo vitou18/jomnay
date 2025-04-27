@@ -1,6 +1,6 @@
 import React from "react";
-import HeaderTable from "../../../layout/components/table/HeaderTable";
 import Transaction from "./Transaction";
+import HeaderTable from "../../../components/table/HeaderTable";
 
 const RecentTransaction = ({ data }) => {
   // console.log(data);

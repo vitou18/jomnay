@@ -1,16 +1,11 @@
 import React from "react";
 import Chart from "react-apexcharts";
+import CountUp from "react-countup";
 
 const FinancialOverview = ({ data }) => {
   // console.log(data);
 
-  const {
-    totalIncome: income,
-    totalExpense: expense,
-    totalBalance: balance,
-  } = data;
-
-  const total = income + expense + balance;
+  const { totalBalance: balance } = data;
 
   const options = {
     chart: {
@@ -29,8 +24,8 @@ const FinancialOverview = ({ data }) => {
         },
       },
     ],
-    labels: ["Total Income", "Total Expense", "Total Balance"],
-    colors: ["#01a73e", "#e7010a", "#9811fb"],
+    labels: ["Total Balance"],
+    colors: ["#9811fb"],
     legend: {
       position: "bottom",
       offsetY: 20,
@@ -47,14 +42,13 @@ const FinancialOverview = ({ data }) => {
     },
   };
 
-  const series = [income, expense, balance];
+  const series = [balance];
 
   return (
     <div className="flex-1 bg-white p-5 rounded-xl">
       <h2 className="text-lg md:text-xl font-medium text-slate-900 mb-7">
         Financial Overview
       </h2>
-
       <div className="donut-chart flex flex-col items-center justify-center space-y-4 relative">
         <Chart options={options} series={series} type="donut" width="400" />
 
@@ -62,7 +56,14 @@ const FinancialOverview = ({ data }) => {
           Total Balance:
         </div>
         <div className="absolute top-[38%] sm:top-[43%] left-1/2 transform -translate-x-1/2 text-[18px] sm:text-[26px] font-medium">
-          ${total}
+          <CountUp
+            start={0}
+            end={parseFloat(balance)}
+            duration={1.5}
+            decimals={2}
+            separator=","
+          />
+          $
         </div>
       </div>
     </div>
