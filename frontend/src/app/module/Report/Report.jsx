@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import useReport from "./core/action";
 import AllReport from "./components/AllReport";
 import Container from "../../components/layout/Container";
+import { ReportLoader } from "../../components/other/Loader";
 
 const Report = () => {
   const {
@@ -12,6 +13,7 @@ const Report = () => {
     onDownloadReport,
     type,
     onChangeType,
+    loading,
   } = useReport();
 
   useEffect(() => {
@@ -20,6 +22,16 @@ const Report = () => {
 
   // console.log(report);
 
+  // Handle loading state
+  if (loading) {
+    return (
+      <>
+        <ReportLoader />
+      </>
+    );
+  }
+
+  // Render actual content when data is available
   return (
     <Container title="Report">
       {report && report.length > 0 ? (

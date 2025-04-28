@@ -1,20 +1,24 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import useDashboard from "./core/action";
 import Overview from "./components/Overview";
 import RecentTransaction from "./components/RecentTransaction";
 import FinancialOverview from "./components/FinancialOverview";
 import Container from "../../components/layout/Container";
+import { DashboardLoader } from "../../components/other/Loader";
 
 const Dashboard = () => {
-  const { dashboard, fetchDashboard } = useDashboard();
+  const { dashboard, fetchDashboard, loading } = useDashboard();
 
   useEffect(() => {
     fetchDashboard();
   }, []);
 
-  // console.log(dashboard);
+  // Handle loading state
+  if (loading) {
+    return <DashboardLoader />;
+  }
 
+  // Render actual content when data is available
   return (
     <Container title="Dashboard">
       {dashboard.recentTransactions?.length > 0 ? (
@@ -26,7 +30,7 @@ const Dashboard = () => {
           </div>
         </>
       ) : (
-        <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
+        <div className="h-30 text-gray-500 w-full flex items-center justify-center text-center">
           No data available
         </div>
       )}

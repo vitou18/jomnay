@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reqGetDashboard } from "./request";
-import { setDashboard } from "./slice";
+import { setDashboard, setLoading } from "./slice";
 
 const useDashboard = () => {
   const dashboard = useSelector((state) => state.dashboard);
@@ -9,12 +9,17 @@ const useDashboard = () => {
   const dispatch = useDispatch();
 
   const fetchDashboard = async () => {
-    return reqGetDashboard()
-      .then((res) => {
-        // console.log(res);
-        dispatch(setDashboard(res.data));
-      })
-      .catch((e) => console.log(e));
+    dispatch(setLoading(true));
+    try {
+      const res = await reqGetDashboard();
+
+      // console.log(res);
+      dispatch(setDashboard(res.data));
+    } catch {
+      console.log("Error get dashboard");
+    } finally {
+      dispatch(setLoading(false));
+    }
   };
 
   return {

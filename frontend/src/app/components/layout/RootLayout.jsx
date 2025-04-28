@@ -19,15 +19,7 @@ const sidebarItems = [
 
 const RootLayout = () => {
   const { onLogout } = useAuth();
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, [location]);
 
   const onClickModal = () => {
     setShow((pre) => !pre);
@@ -47,7 +39,6 @@ const RootLayout = () => {
       />
 
       <div className="transition-all relative duration-300 md:ml-64">
-        {loading && <Loader />}
         <Outlet />
       </div>
 

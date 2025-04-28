@@ -28,6 +28,7 @@ const Edit = ({ onClick }) => {
     }
 
     await onUpdateIncome();
+
     onClick();
   };
 

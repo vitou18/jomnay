@@ -17,6 +17,7 @@ const initialState = {
   profile: JSON.parse(localStorage.getItem("user") ?? "{}"),
   accessToken: localStorage.getItem("access_token"),
   register: createUser,
+  loading: false,
 };
 
 const authSlice = createSlice({
@@ -55,10 +56,21 @@ const authSlice = createSlice({
     resetRegister: (state) => {
       state.register = createUser;
     },
+
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
   },
 });
 
-export const { setAccessToken, setProfile, setLogin, setLogout, setRegister, resetRegister } =
-  authSlice.actions;
+export const {
+  setAccessToken,
+  setProfile,
+  setLogin,
+  setLogout,
+  setRegister,
+  resetRegister,
+  setLoading,
+} = authSlice.actions;
 
 export default authSlice.reducer;

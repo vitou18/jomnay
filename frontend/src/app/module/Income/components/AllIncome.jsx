@@ -5,9 +5,11 @@ import Modal from "../../../utils/Modal";
 import Add from "./Add";
 import Edit from "./Edit";
 import View from "./View";
+import { ContainerLoader } from "../../../components/other/Loader";
 
 const AllIncome = () => {
-  const { fetchIncome, income, onDeleteIncome, fetchIncomeById } = useIncome();
+  const { fetchIncome, income, onDeleteIncome, fetchIncomeById, loading } =
+    useIncome();
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showView, setShowView] = useState(false);
@@ -27,6 +29,16 @@ const AllIncome = () => {
     fetchIncome();
   }, []);
 
+  // Handle loading state
+  if (loading) {
+    return (
+      <>
+        <ContainerLoader />
+      </>
+    );
+  }
+
+  // Render actual content when data is available
   return (
     <>
       <Table
@@ -36,6 +48,7 @@ const AllIncome = () => {
         onEdit={onEditIncome}
         onView={onViewIncome}
       />
+
       <Modal
         title="Add Income"
         desc="Record a new income entry."
