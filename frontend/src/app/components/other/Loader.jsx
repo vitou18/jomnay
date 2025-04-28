@@ -92,7 +92,7 @@ export const ReportLoader = () => {
         <div className="h-12 animate-pulse bg-gray-200 rounded w-1/8"></div>
       </header>
 
-      <div className="md:grid hidden gap-y-4 mt-7">
+      <div className="grid gap-y-4 mt-7">
         <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
         <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
         <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
