@@ -25,9 +25,9 @@ const Report = () => {
   // Handle loading state
   if (loading) {
     return (
-      <>
+      <Container title="Report">
         <ReportLoader />
-      </>
+      </Container>
     );
   }
 
