@@ -61,6 +61,8 @@ const useExpense = () => {
 
       onResetAdd();
       fetchExpense();
+
+      return true;
     } catch (e) {
       console.log(e);
 
