@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import useReport from "./core/action";
 import AllReport from "./components/AllReport";
 import Container from "../../components/layout/Container";
-import { ReportLoader } from "../../components/other/Loader";
 
 const Report = () => {
   const {
@@ -22,17 +21,10 @@ const Report = () => {
 
   // console.log(report);
 
-  if (loadData) {
-    return (
-      <Container title="Report">
-        <ReportLoader />
-      </Container>
-    );
-  }
-
   return (
     <Container title="Report">
       <AllReport
+        loadData={loadData}
         data={report}
         type={type}
         format={format}

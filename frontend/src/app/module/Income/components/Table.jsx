@@ -4,8 +4,9 @@ import CardContainer from "../../../components/card/CardContainer";
 import TableContainer from "../../../components/table/TableContainer";
 import Modal from "../../../utils/Modal";
 import Action from "../../../utils/Action";
+import { ContainerLoader } from "../../../components/other/Loader";
 
-const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
+const Table = ({ data, onDelete, onAdd, onEdit, onView, loadData }) => {
   const [selected, setSelected] = useState({ id: null });
   const [show, setShow] = useState(false);
 
@@ -23,28 +24,34 @@ const Table = ({ data, onDelete, onAdd, onEdit, onView }) => {
     <section className="bg-white rounded-xl p-5 flex flex-col gap-y-7">
       <HeaderTable onClick={onAdd} />
 
-      {data && data.length > 0 ? (
-        <>
-          <CardContainer
-            data={data}
-            onEdit={onEdit}
-            onDelete={onGetIdCard}
-            onView={onView}
-            type="income"
-          />
-
-          <TableContainer
-            type="income"
-            onView={onView}
-            onEdit={onEdit}
-            onDelete={onGetIdCard}
-            data={data}
-          />
-        </>
+      {loadData ? (
+        <ContainerLoader />
       ) : (
-        <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
-          No data available
-        </div>
+        <>
+          {data && data.length > 0 ? (
+            <>
+              <CardContainer
+                data={data}
+                onEdit={onEdit}
+                onDelete={onGetIdCard}
+                onView={onView}
+                type="income"
+              />
+
+              <TableContainer
+                type="income"
+                onView={onView}
+                onEdit={onEdit}
+                onDelete={onGetIdCard}
+                data={data}
+              />
+            </>
+          ) : (
+            <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
+              No data available
+            </div>
+          )}
+        </>
       )}
 
       <Modal

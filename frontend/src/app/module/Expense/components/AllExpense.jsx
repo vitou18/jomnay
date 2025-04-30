@@ -29,13 +29,10 @@ const AllExpense = () => {
     fetchExpense();
   }, []);
 
-  if (loadData) {
-    return <ContainerLoader />;
-  }
-
   return (
     <>
       <Table
+        loadData={loadData}
         onAdd={() => setShowAdd((pre) => !pre)}
         data={expense}
         onEdit={onEditExpense}

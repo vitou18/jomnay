@@ -85,34 +85,20 @@ export const DashboardLoader = () => {
 
 export const ReportLoader = () => {
   return (
-    <section className="bg-white px-4 py-6 rounded-lg">
-      <header className="flex justify-between items-center">
-        <div className="h-12 animate-pulse bg-gray-200 rounded w-1/3"></div>
-
-        <div className="h-12 animate-pulse bg-gray-200 rounded w-1/8"></div>
-      </header>
-
-      <div className="grid gap-y-4 mt-7">
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-        <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
-      </div>
-    </section>
+    <div className="grid gap-y-4 mt-7">
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+      <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
+    </div>
   );
 };
 
 export const ContainerLoader = () => {
   return (
-    <section className="bg-white px-4 py-6 rounded-lg">
-      <header className="flex justify-between items-center">
-        <div className="h-12 animate-pulse bg-gray-200 rounded w-1/3"></div>
-
-        <div className="h-12 animate-pulse bg-gray-200 rounded w-1/8"></div>
-      </header>
-
+    <>
       <div className="md:grid hidden gap-y-4 mt-7">
         <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
         <div className="h-10 animate-pulse bg-gray-200 rounded"></div>
@@ -145,7 +131,7 @@ export const ContainerLoader = () => {
           </article>
         ))}
       </div>
-    </section>
+    </>
   );
 };
 

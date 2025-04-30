@@ -29,13 +29,10 @@ const AllIncome = () => {
     fetchIncome();
   }, []);
 
-  if (loadData) {
-    return <ContainerLoader />;
-  }
-
   return (
     <>
       <Table
+        loadData={loadData}
         data={income}
         onAdd={() => setShowAdd((pre) => !pre)}
         onDelete={onDeleteIncome}
