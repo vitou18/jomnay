@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   dashboard: [],
+  loadData: false,
 };
 
 const dashboardSlice = createSlice({
@@ -11,9 +12,13 @@ const dashboardSlice = createSlice({
     setDashboard: (state, action) => {
       state.dashboard = action.payload;
     },
+
+    setLoadData: (state, action) => {
+      state.loadData = action.payload;
+    },
   },
 });
 
-export const { setDashboard } = dashboardSlice.actions;
+export const { setDashboard, setLoadData } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

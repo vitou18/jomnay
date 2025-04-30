@@ -5,15 +5,20 @@ import Overview from "./components/Overview";
 import RecentTransaction from "./components/RecentTransaction";
 import FinancialOverview from "./components/FinancialOverview";
 import Container from "../../components/layout/Container";
+import { DashboardLoader } from "../../components/other/Loader";
 
 const Dashboard = () => {
-  const { dashboard, fetchDashboard } = useDashboard();
+  const { dashboard, fetchDashboard, loadData } = useDashboard();
 
   useEffect(() => {
     fetchDashboard();
   }, []);
 
   // console.log(dashboard);
+
+  if (loadData) {
+    return <DashboardLoader />;
+  }
 
   return (
     <Container title="Dashboard">

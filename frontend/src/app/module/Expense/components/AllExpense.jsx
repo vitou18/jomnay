@@ -5,9 +5,10 @@ import Add from "./Add";
 import Edit from "./Edit";
 import View from "./View";
 import Modal from "../../../utils/Modal";
+import { ContainerLoader } from "../../../components/other/Loader";
 
 const AllExpense = () => {
-  const { fetchExpense, expense, onDeleteExpense, fetchExpenseById } =
+  const { fetchExpense, expense, onDeleteExpense, fetchExpenseById, loadData } =
     useExpense();
   const [showAdd, setShowAdd] = useState();
   const [showEdit, setShowEdit] = useState();
@@ -27,6 +28,10 @@ const AllExpense = () => {
   useEffect(() => {
     fetchExpense();
   }, []);
+
+  if (loadData) {
+    return <ContainerLoader />;
+  }
 
   return (
     <>

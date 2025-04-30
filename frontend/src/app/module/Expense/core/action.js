@@ -12,6 +12,7 @@ import {
   setExpenseDetails,
   setExpenseDetailsInfo,
   setExpenseInfo,
+  setLoadData,
 } from "./slice";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -24,6 +25,8 @@ const useExpense = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchExpense = async () => {
+    dispatch(setLoadData(true));
+
     return reqGetExpense()
       .then((res) => {
         // console.log(res)
@@ -31,6 +34,9 @@ const useExpense = () => {
       })
       .catch((e) => {
         console.log(e);
+      })
+      .finally(() => {
+        dispatch(setLoadData(false));
       });
   };
 

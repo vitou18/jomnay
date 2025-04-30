@@ -12,6 +12,7 @@ import {
   setIncomeDetails,
   setIncomeDetailsInfo,
   setIncomeInfo,
+  setLoadData,
 } from "./slice";
 import toast from "react-hot-toast";
 import moment from "moment";
@@ -24,11 +25,15 @@ const useIncome = () => {
   const [loading, setLoading] = useState(false);
 
   const fetchIncome = async () => {
+    dispatch(setLoadData(true));
+
     try {
       const res = await reqGetIncome();
       dispatch(setIncome(res.data));
     } catch (e) {
       console.log("Error fetching income...", e);
+    } finally {
+      dispatch(setLoadData(false));
     }
   };
 

@@ -3,7 +3,6 @@ import { Outlet, useLocation } from "react-router-dom";
 import logo from "../../../_template/assets/img/small_logo.png";
 import Modal from "../../utils/Modal";
 import Sidebar from "../sidebar/Sidebar";
-import Loader from "../other/Loader";
 import Action from "../../utils/Action";
 import { MdSpaceDashboard } from "react-icons/md";
 import { HiOutlineDocumentReport } from "react-icons/hi";
@@ -19,15 +18,7 @@ const sidebarItems = [
 
 const RootLayout = () => {
   const { onLogout } = useAuth();
-  const location = useLocation();
-  const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 500);
-    return () => clearTimeout(timer);
-  }, [location]);
 
   const onClickModal = () => {
     setShow((pre) => !pre);
@@ -47,7 +38,6 @@ const RootLayout = () => {
       />
 
       <div className="transition-all relative duration-300 md:ml-64">
-        {loading && <Loader />}
         <Outlet />
       </div>
 

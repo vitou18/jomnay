@@ -5,9 +5,11 @@ import Modal from "../../../utils/Modal";
 import Add from "./Add";
 import Edit from "./Edit";
 import View from "./View";
+import { ContainerLoader } from "../../../components/other/Loader";
 
 const AllIncome = () => {
-  const { fetchIncome, income, onDeleteIncome, fetchIncomeById } = useIncome();
+  const { fetchIncome, income, onDeleteIncome, fetchIncomeById, loadData } =
+    useIncome();
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showView, setShowView] = useState(false);
@@ -26,6 +28,10 @@ const AllIncome = () => {
   useEffect(() => {
     fetchIncome();
   }, []);
+
+  if (loadData) {
+    return <ContainerLoader />;
+  }
 
   return (
     <>

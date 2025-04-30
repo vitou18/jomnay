@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { reqDownloadReport, reqGetReport } from "./request";
-import { setFormat, setReport, setType } from "./slice";
+import { setFormat, setLoadData, setReport, setType } from "./slice";
 import toast from "react-hot-toast";
 
 const useReport = () => {
@@ -12,6 +12,8 @@ const useReport = () => {
   const { type, format } = report;
 
   const fetchReport = async () => {
+    dispatch(setLoadData(true));
+
     return reqGetReport(type)
       .then((res) => {
         // console.log(res.data.report);
@@ -19,6 +21,9 @@ const useReport = () => {
       })
       .catch((e) => {
         console.log("Error fetching report...");
+      })
+      .then(() => {
+        dispatch(setLoadData(false));
       });
   };
 

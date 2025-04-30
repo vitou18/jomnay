@@ -4,6 +4,7 @@ const initialState = {
   report: [],
   type: "month",
   format: "csv",
+  loadData: false,
 };
 
 const reportSlice = createSlice({
@@ -13,15 +14,21 @@ const reportSlice = createSlice({
     setReport: (state, action) => {
       state.report = action.payload;
     },
+
     setType: (state, action) => {
       state.type = action.payload;
     },
+
     setFormat: (state, action) => {
       state.format = action.payload;
+    },
+
+    setLoadData: (state, action) => {
+      state.loadData = action.payload;
     },
   },
 });
 
-export const { setReport, setType, setFormat } = reportSlice.actions;
+export const { setReport, setType, setFormat, setLoadData } = reportSlice.actions;
 
 export default reportSlice.reducer;
