@@ -8,7 +8,7 @@ import Modal from "../../../utils/Modal";
 import { ContainerLoader } from "../../../components/other/Loader";
 
 const AllExpense = () => {
-  const { fetchExpense, expense, onDeleteExpense, fetchExpenseById, loading } =
+  const { fetchExpense, expense, onDeleteExpense, fetchExpenseById, loadData } =
     useExpense();
   const [showAdd, setShowAdd] = useState();
   const [showEdit, setShowEdit] = useState();
@@ -29,16 +29,10 @@ const AllExpense = () => {
     fetchExpense();
   }, []);
 
-  // Handle loading state
-  if (loading) {
-    return (
-      <>
-        <ContainerLoader />
-      </>
-    );
+  if (loadData) {
+    return <ContainerLoader />;
   }
 
-  // Render actual content when data is available
   return (
     <>
       <Table

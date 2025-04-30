@@ -4,21 +4,25 @@ import { reqLogin, reqRegister } from "./request";
 import {
   resetRegister,
   setAccessToken,
-  setLoading,
+  setLoadData,
   setLogin,
   setLogout,
   setProfile,
   setRegister,
 } from "./slice";
 import toast from "react-hot-toast";
+import { useState } from "react";
 
 const useAuth = () => {
   const auth = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const onLogin = async (payload) => {
-    dispatch(setLoading(true));
+    setLoading(true);
+    dispatch(setLoadData(true));
+
     return reqLogin(payload)
       .then((res) => {
         dispatch(setProfile(res.data.user));
@@ -29,7 +33,8 @@ const useAuth = () => {
         toast.error("Invalid credentials");
       })
       .finally(() => {
-        dispatch(setLoading(false));
+        setLoading(false);
+        setLoadData(false);
       });
   };
 
@@ -48,29 +53,27 @@ const useAuth = () => {
     dispatch(setRegister({ name: e.target.name, value: e.target.value }));
 
   const onRegister = async () => {
-    dispatch(setLoading(true));
+    setLoading(true);
 
     const { cpassword, ...registerData } = auth.register;
 
-    try {
-      const res = await reqRegister(registerData);
-
-      dispatch(setProfile(res.data.user));
-      dispatch(setAccessToken(res.data.token));
-
-      toast.success("Registration successful");
-      dispatch(resetRegister());
-      navigate("/");
-    } catch {
-      toast.error("Registration failed");
-    } finally {
-      dispatch(setLoading(false));
-    }
+    return reqRegister(registerData)
+      .then(() => {
+        toast.success("Registration successful");
+        dispatch(resetRegister());
+      })
+      .catch(() => {
+        toast.error("Registration failed");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return {
     ...auth,
     navigate,
+    loading,
     onLogin,
     onChangeLogin,
     onLogout,

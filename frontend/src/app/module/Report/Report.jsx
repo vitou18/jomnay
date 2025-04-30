@@ -13,7 +13,7 @@ const Report = () => {
     onDownloadReport,
     type,
     onChangeType,
-    loading,
+    loadData,
   } = useReport();
 
   useEffect(() => {
@@ -22,8 +22,7 @@ const Report = () => {
 
   // console.log(report);
 
-  // Handle loading state
-  if (loading) {
+  if (loadData) {
     return (
       <Container title="Report">
         <ReportLoader />
@@ -31,7 +30,6 @@ const Report = () => {
     );
   }
 
-  // Render actual content when data is available
   return (
     <Container title="Report">
       {report && report.length > 0 ? (

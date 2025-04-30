@@ -1,7 +1,7 @@
 import React from "react";
 import Container from "../layout/Container";
 
-const Loader = () => {
+export const Loader = () => {
   return (
     <div className="w-full h-screen flex items-center justify-center absolute top-0 left-0 z-20 bg-purple-600/4 backdrop-blur-md">
       <div className="relative flex items-center justify-center w-10 h-10 border-4 border-purple-600/40 rounded-full shadow-md shadow-purple-600/20 inset-shadow">

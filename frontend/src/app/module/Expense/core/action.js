@@ -12,47 +12,50 @@ import {
   setExpenseDetails,
   setExpenseDetailsInfo,
   setExpenseInfo,
-  setLoading,
+  setLoadData,
 } from "./slice";
+import { useState } from "react";
 import toast from "react-hot-toast";
-import moment from "moment";
+import moment from "moment/moment";
 
 const useExpense = () => {
   const expense = useSelector((state) => state.expense);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
-  // Fetch all expenses
   const fetchExpense = async () => {
-    dispatch(setLoading(true));
+    dispatch(setLoadData(true));
 
-    try {
-      const res = await reqGetExpense();
-
-      dispatch(setExpense(res.data));
-    } catch (e) {
-      console.log(e);
-
-      toast.error("Error fetching expenses");
-    } finally {
-      dispatch(setLoading(false));
-    }
+    return reqGetExpense()
+      .then((res) => {
+        // console.log(res)
+        dispatch(setExpense(res.data));
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+      .finally(() => {
+        dispatch(setLoadData(false));
+      });
   };
 
-  // Handle changes in the expense form (Add)
   const onChangeAdd = (e) =>
     dispatch(setExpenseInfo({ name: e.target.name, value: e.target.value }));
 
-  // Reset the form fields (Add)
   const onResetAdd = () => dispatch(resetExpenseInfo());
 
-  // Create a new expense
   const onCreateExpense = async () => {
     const { date } = expense.expenseInfo;
-    const formattedDate = moment(date).toISOString();
-    const data = { ...expense.expenseInfo, date: formattedDate };
 
-    dispatch(setLoading(true));
+    const formattedDate = moment(date).toISOString();
+
+    const data = {
+      ...expense.expenseInfo,
+      date: formattedDate,
+    };
+
+    setLoading(true);
 
     try {
       await reqCreateExpense(data);
@@ -67,59 +70,47 @@ const useExpense = () => {
       console.log(e);
 
       const message =
-        e?.response?.data?.message || e.message || "Error adding expense";
+        e?.response?.data?.message || e.message || "Error adding income";
 
       toast.error(message);
+
+      return false;
     } finally {
-      dispatch(setLoading(false));
+      setLoading(false);
     }
   };
 
-  // Delete an expense by ID
   const onDeleteExpense = async (id) => {
-    dispatch(setLoading(true));
-
-    try {
-      await reqDeleteExpense(id);
-
-      toast.success("Expense has been deleted...");
-
-      fetchExpense();
-    } catch (e) {
-      console.log(e);
-
-      toast.error("Error deleting expense...");
-    } finally {
-      dispatch(setLoading(false));
-    }
+    return reqDeleteExpense(id)
+      .then(() => {
+        toast.success("Expense has been deleted...");
+        fetchExpense();
+      })
+      .catch(() => {
+        toast.error("Error deleting income...");
+      });
   };
 
-  // Fetch expense details by ID
   const fetchExpenseById = (payload) => dispatch(setExpenseDetails(payload));
 
-  // Handle changes in the expense details form (Edit)
   const onChangeEdit = (e) =>
     dispatch(
       setExpenseDetailsInfo({ name: e.target.name, value: e.target.value })
     );
 
-  // Update an expense
   const onUpdateExpense = async () => {
     const data = expense.expenseDetails;
 
-    dispatch(setLoading(true));
+    setLoading(true);
 
     try {
       await reqUpdateExpense(data._id, data);
-
       toast.success(`${data?.category} has been updated...`);
-
       fetchExpense();
-    } catch (e) {
-      console.log(e);
+    } catch {
       toast.error("Error updating expense");
     } finally {
-      dispatch(setLoading(false));
+      setLoading(false);
     }
   };
 
@@ -130,6 +121,7 @@ const useExpense = () => {
     onChangeAdd,
     onResetAdd,
     onCreateExpense,
+    loading,
     onDeleteExpense,
     fetchExpenseById,
     onChangeEdit,

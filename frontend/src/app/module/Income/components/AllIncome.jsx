@@ -8,7 +8,7 @@ import View from "./View";
 import { ContainerLoader } from "../../../components/other/Loader";
 
 const AllIncome = () => {
-  const { fetchIncome, income, onDeleteIncome, fetchIncomeById, loading } =
+  const { fetchIncome, income, onDeleteIncome, fetchIncomeById, loadData } =
     useIncome();
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -29,16 +29,10 @@ const AllIncome = () => {
     fetchIncome();
   }, []);
 
-  // Handle loading state
-  if (loading) {
-    return (
-      <>
-        <ContainerLoader />
-      </>
-    );
+  if (loadData) {
+    return <ContainerLoader />;
   }
 
-  // Render actual content when data is available
   return (
     <>
       <Table
@@ -48,7 +42,6 @@ const AllIncome = () => {
         onEdit={onEditIncome}
         onView={onViewIncome}
       />
-
       <Modal
         title="Add Income"
         desc="Record a new income entry."
