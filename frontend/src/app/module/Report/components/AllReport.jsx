@@ -28,6 +28,7 @@ const AllReport = ({
               onChange={onChangeType}
               className="appearance-none bg-white transition-all duration-300 text-sm text-slate-500 px-4 py-2 pr-7 rounded-md border-2 border-slate-700/5 outline-none focus:border-slate-900 focus:text-slate-900"
             >
+              <option value="all">All</option>
               <option value="week">Weekly</option>
               <option value="month">Monthly</option>
               <option value="year">Yearly</option>

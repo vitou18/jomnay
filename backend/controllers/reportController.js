@@ -28,6 +28,12 @@ function getDateRange(type) {
       start = new Date(now.getFullYear(), 0, 1);
       end = new Date(now.getFullYear(), 11, 31, 23, 59, 59, 999);
       break;
+    case "all":
+      start = new Date(2000, 0, 1);
+      start.setHours(0, 0, 0, 0);
+      end = new Date(2100, 11, 31);
+      end.setHours(23, 59, 59, 999);
+      break;
     default:
       return null;
   }
@@ -206,9 +212,9 @@ exports.downloadReport = async (req, res) => {
         if (entries.length === 0) return;
 
         // Section Title
-        doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#f8b195");
+        doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#9333ea");
         doc
-          .fillColor("black")
+          .fillColor("white")
           .fontSize(12)
           .text(title, 55, doc.y + 5);
         doc.moveDown(1.2);
@@ -271,10 +277,10 @@ exports.downloadReport = async (req, res) => {
       drawSection("Expense", expenseEntries);
 
       // Final Balance Section
-      doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#f8b195");
+      doc.rect(50, doc.y, doc.page.width - 100, 20).fill("#9333ea");
 
       doc
-        .fillColor("black")
+        .fillColor("white")
         .fontSize(12)
         .text("Final Balance", 60, doc.y + 5)
         .text(

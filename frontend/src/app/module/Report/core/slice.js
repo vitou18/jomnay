@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   report: [],
-  type: "month",
+  type: "all",
   format: "csv",
   loadData: false,
 };
@@ -29,6 +29,7 @@ const reportSlice = createSlice({
   },
 });
 
-export const { setReport, setType, setFormat, setLoadData } = reportSlice.actions;
+export const { setReport, setType, setFormat, setLoadData } =
+  reportSlice.actions;
 
 export default reportSlice.reducer;
