@@ -32,20 +32,14 @@ const Report = () => {
 
   return (
     <Container title="Report">
-      {report && report.length > 0 ? (
-        <AllReport
-          data={report}
-          type={type}
-          format={format}
-          onChangeFormat={onChangeFormat}
-          onChangeType={onChangeType}
-          onDownloadReport={onDownloadReport}
-        />
-      ) : (
-        <div className="h-30 text-gray-500 w-full flex items-center text-center justify-center">
-          No data available
-        </div>
-      )}
+      <AllReport
+        data={report}
+        type={type}
+        format={format}
+        onChangeFormat={onChangeFormat}
+        onChangeType={onChangeType}
+        onDownloadReport={onDownloadReport}
+      />
     </Container>
   );
 };

@@ -55,11 +55,13 @@ const AllReport = ({
             </div>
           </div>
 
-          <Button
-            text="Download"
-            onClick={onDownloadReport}
-            icon={RiDownloadLine}
-          />
+          {data && data.length > 0 && (
+            <Button
+              text="Download"
+              onClick={onDownloadReport}
+              icon={RiDownloadLine}
+            />
+          )}
         </div>
       </header>
 
