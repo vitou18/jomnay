@@ -4,6 +4,7 @@ import { reqLogin, reqRegister } from "./request";
 import {
   resetRegister,
   setAccessToken,
+  setLoadData,
   setLogin,
   setLogout,
   setProfile,
@@ -20,17 +21,20 @@ const useAuth = () => {
 
   const onLogin = async (payload) => {
     setLoading(true);
+    dispatch(setLoadData(true));
+
     return reqLogin(payload)
       .then((res) => {
         dispatch(setProfile(res.data.user));
         dispatch(setAccessToken(res.data.token));
         navigate("/");
       })
-      .catch((e) => {
+      .catch(() => {
         toast.error("Invalid credentials");
       })
       .finally(() => {
         setLoading(false);
+        setLoadData(false);
       });
   };
 
